@@ -1,0 +1,13 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    unused_field: ignore
+    unused_local_variable: ignore
+    todo: ignore
+
+linter:
+  rules:
+    avoid_print: true
+    empty_statements: true
+    prefer_single_quotes: true
