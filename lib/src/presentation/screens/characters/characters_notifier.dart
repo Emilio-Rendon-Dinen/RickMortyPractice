@@ -17,6 +17,37 @@ class CharactersNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  int _count = 1;
+  int get count => _count;
+
+  void increment() {
+    _count++;
+    notifyListeners();
+    fetchCharacters();
+  }
+
+  // void getCharacter (String name) async {
+  //    snapshotCharacters = snapshotCharacters.copyWith(
+  //     isLoading: true,
+  //     error: null,
+  //   );
+
+  //   dynamic errorWhenFetchCharacters;
+  //   List<Character> characters;
+  //   try {
+  //     characters = await _charactersUseCase.getCharacterByName(name);
+  //     snapshotCharacters.data.addAll(characters);
+  //   } catch (e) {
+  //     errorWhenFetchCharacters = e;
+  //     characters = [];
+  //   }
+
+  //   snapshotCharacters = snapshotCharacters.copyWith(
+  //     isLoading: false,
+  //     error: errorWhenFetchCharacters,
+  //   );
+  // }
+
   void fetchCharacters() async {
     snapshotCharacters = snapshotCharacters.copyWith(
       isLoading: true,
@@ -26,14 +57,14 @@ class CharactersNotifier extends ChangeNotifier {
     dynamic errorWhenFetchCharacters;
     List<Character> characters;
     try {
-      characters = await _charactersUseCase.getCharaceters(pageIndex: 1);
+      characters = await _charactersUseCase.getCharaceters(pageIndex: count);
+      snapshotCharacters.data.addAll(characters);
     } catch (e) {
       errorWhenFetchCharacters = e;
       characters = [];
     }
 
     snapshotCharacters = snapshotCharacters.copyWith(
-      data: characters,
       isLoading: false,
       error: errorWhenFetchCharacters,
     );

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_morty_practice/src/domain/models/character.dart';
 import 'package:rick_morty_practice/src/presentation/models/snapshot_data.dart';
 import 'package:rick_morty_practice/src/presentation/screens/characters/characters_notifier.dart';
+import 'package:rick_morty_practice/src/presentation/screens/characters/widgets/search_delegate.dart';
 
 part 'widgets/character_widget.dart';
 part 'widgets/characters_widget.dart';
@@ -20,7 +22,17 @@ class CharactersScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Characters'),
+        title: const Text(
+          'Rick and Morty',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                showSearch(context: context, delegate: SearchCharacter());
+              },
+              icon: const Icon(Icons.search))
+        ],
       ),
       body: const _CharactersWidget(),
     );
