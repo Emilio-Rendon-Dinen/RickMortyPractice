@@ -22,7 +22,7 @@ class HttpEpisodesRepository extends EpisodesRepository {
       throw 'unexpected_data';
     }
 
-    final Episode? episode = Episode.parseToObject(data['results']);
+    final Episode? episode = Episode.parseToObject(data);
     if (episode == null) {
       throw 'unparsed_data';
     }

@@ -9,5 +9,9 @@ class _InjectorRepositories {
     Injector.register<CharactersRepository>(instanceName: 'dio_characters_repository', () {
       return const DioCharactersRepository();
     });
+
+    Injector.register<EpisodesRepository>(instanceName: 'http_episode_repository', () {
+      return const HttpEpisodesRepository();
+    });
   }
 }

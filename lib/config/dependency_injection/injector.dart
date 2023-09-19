@@ -3,8 +3,11 @@ import 'dart:async';
 import 'package:get_it/get_it.dart';
 import 'package:rick_morty_practice/src/data/repository/dio_characters_repository.dart';
 import 'package:rick_morty_practice/src/data/repository/http_characters_repository.dart';
+import 'package:rick_morty_practice/src/data/repository/http_episodes_repository.dart';
 import 'package:rick_morty_practice/src/domain/repositories/characters_repository.dart';
+import 'package:rick_morty_practice/src/domain/repositories/episodes_repository.dart';
 import 'package:rick_morty_practice/src/domain/use_cases/characters_use_case.dart';
+import 'package:rick_morty_practice/src/domain/use_cases/episodes_use_case.dart';
 
 part 'injector_repositories.dart';
 part 'injector_use_cases.dart';
