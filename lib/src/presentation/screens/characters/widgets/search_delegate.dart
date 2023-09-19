@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import 'package:rick_morty_practice/src/domain/models/character.dart';
-import 'package:rick_morty_practice/src/presentation/models/snapshot_data.dart';
-import 'package:rick_morty_practice/src/presentation/screens/characters/characters_notifier.dart';
+part of '../characters_screen.dart';
 
 class SearchCharacter extends SearchDelegate {
   @override
@@ -33,15 +28,15 @@ class SearchCharacter extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    SnapshotData<List<Character>> snapshotCharacters = context.select<CharactersNotifier, SnapshotData<List<Character>>>((notifier) => notifier.snapshotCharacters);
-
+    SnapshotData<Character?> snapshotCharacter = context.select<CharactersNotifier, SnapshotData<Character?>>((notifier) => notifier.snapshotCharacter);
+    // CharactersNotifier? charactersNotifier;
     circleLoading();
 
     if (query.isEmpty) {
       return circleLoading();
     }
     return FutureBuilder(
-      future: characterProvider.getCharacter(query),
+      future: context.read<CharactersNotifier>().getCharacter(query),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Column(
@@ -51,23 +46,19 @@ class SearchCharacter extends SearchDelegate {
             ],
           );
         }
-        return ListView.builder(
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
-              final character = snapshot.data![index];
-              return ListTile(
-                onTap: () {
-                  context.go('/character', extra: character);
-                },
-                title: Text(character.name),
-                leading: Hero(
-                  tag: character.id,
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(character.image),
-                  ),
-                ),
-              );
-            });
+
+        return ListTile(
+          onTap: () {
+            // context.go('/character', extra: snapshotCharacter);
+          },
+          title: Text(snapshotCharacter.data!.name),
+          leading: Hero(
+            tag: snapshotCharacter.data!.id,
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(snapshotCharacter.data!.image),
+            ),
+          ),
+        );
       },
     );
   }

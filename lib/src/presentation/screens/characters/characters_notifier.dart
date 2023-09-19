@@ -17,6 +17,13 @@ class CharactersNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  SnapshotData<Character?> _snapshotCharacter = SnapshotData.initial(data: null);
+  SnapshotData<Character?> get snapshotCharacter => _snapshotCharacter;
+  set snapshotCharacter(SnapshotData<Character?> value) {
+    _snapshotCharacter = value;
+    notifyListeners();
+  }
+
   int _count = 1;
   int get count => _count;
 
@@ -26,27 +33,26 @@ class CharactersNotifier extends ChangeNotifier {
     fetchCharacters();
   }
 
-  // void getCharacter (String name) async {
-  //    snapshotCharacters = snapshotCharacters.copyWith(
-  //     isLoading: true,
-  //     error: null,
-  //   );
+  Future getCharacter(String name) async {
+    snapshotCharacter = snapshotCharacter.copyWith(
+      isLoading: true,
+      error: null,
+    );
 
-  //   dynamic errorWhenFetchCharacters;
-  //   List<Character> characters;
-  //   try {
-  //     characters = await _charactersUseCase.getCharacterByName(name);
-  //     snapshotCharacters.data.addAll(characters);
-  //   } catch (e) {
-  //     errorWhenFetchCharacters = e;
-  //     characters = [];
-  //   }
+    dynamic errorWhenFetchCharacters;
+    Character? character;
+    try {
+      character = await _charactersUseCase.getCharacterByName(name);
+    } catch (e) {
+      errorWhenFetchCharacters = e;
+      character = null;
+    }
 
-  //   snapshotCharacters = snapshotCharacters.copyWith(
-  //     isLoading: false,
-  //     error: errorWhenFetchCharacters,
-  //   );
-  // }
+    snapshotCharacters = snapshotCharacters.copyWith(
+      isLoading: false,
+      error: errorWhenFetchCharacters,
+    );
+  }
 
   void fetchCharacters() async {
     snapshotCharacters = snapshotCharacters.copyWith(

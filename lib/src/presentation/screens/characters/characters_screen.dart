@@ -4,10 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:rick_morty_practice/src/domain/models/character.dart';
 import 'package:rick_morty_practice/src/presentation/models/snapshot_data.dart';
 import 'package:rick_morty_practice/src/presentation/screens/characters/characters_notifier.dart';
-import 'package:rick_morty_practice/src/presentation/screens/characters/widgets/search_delegate.dart';
 
-part 'widgets/character_widget.dart';
 part 'widgets/characters_widget.dart';
+part 'widgets/search_delegate.dart';
 
 class CharactersScreen extends StatelessWidget {
   const CharactersScreen({
