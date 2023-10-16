@@ -32,6 +32,7 @@ class Routes {
         ),
         GoRoute(
           path: '/character',
+          parentNavigatorKey: _rootNavigatorKey,
           builder: (context, state) {
             final character = state.extra as Character;
             return ChangeNotifierProvider(

@@ -25,6 +25,9 @@ class RickMortyPracticeApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: Routes.getConfig(),
       onGenerateTitle: (_) => '',
+      // theme: ThemeData(
+      //   useMaterial3: true,
+      // ),
     );
   }
 }

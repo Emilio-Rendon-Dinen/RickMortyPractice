@@ -33,7 +33,11 @@ class CharactersScreen extends StatelessWidget {
               icon: const Icon(Icons.search))
         ],
       ),
-      body: const _CharactersWidget(),
+      body: _CharactersWidget(
+        onTap: (character) {
+          context.push('/character', extra: character);
+        },
+      ),
     );
   }
 }

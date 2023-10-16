@@ -1,7 +1,8 @@
 part of '../characters_screen.dart';
 
 class _CharactersWidget extends StatefulWidget {
-  const _CharactersWidget();
+  final void Function(Character character)? onTap;
+  const _CharactersWidget({this.onTap});
 
   @override
   State<_CharactersWidget> createState() => _CharactersWidgetState();
@@ -38,7 +39,7 @@ class _CharactersWidgetState extends State<_CharactersWidget> {
         if (index < snapshotCharacters.data.length) {
           final character = snapshotCharacters.data[index];
           return GestureDetector(
-            onTap: () => context.go('/character', extra: character),
+            onTap: () => widget.onTap!(character),
             child: Card(
               child: Column(
                 children: [

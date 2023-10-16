@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 import 'package:rick_morty_practice/src/domain/models/character.dart';
 import 'package:rick_morty_practice/src/domain/models/episode.dart';
