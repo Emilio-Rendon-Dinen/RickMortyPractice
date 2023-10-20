@@ -17,10 +17,10 @@ class CharactersNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  SnapshotData<Character?> _snapshotCharacter = SnapshotData.initial(data: null);
-  SnapshotData<Character?> get snapshotCharacter => _snapshotCharacter;
-  set snapshotCharacter(SnapshotData<Character?> value) {
-    _snapshotCharacter = value;
+  SnapshotData<List<Character>> _snapshotSearchCharacters = SnapshotData.initial(data: []);
+  SnapshotData<List<Character>> get snapshotSearchCharacters => _snapshotSearchCharacters;
+  set snapshotSearchCharacters(SnapshotData<List<Character>> value) {
+    _snapshotSearchCharacters = value;
     notifyListeners();
   }
 
@@ -33,25 +33,28 @@ class CharactersNotifier extends ChangeNotifier {
     fetchCharacters();
   }
 
-  Future getCharacter(String name) async {
-    snapshotCharacter = snapshotCharacter.copyWith(
+  Future<List<Character>> getCharacterBySearch(String name) async {
+    snapshotSearchCharacters = snapshotSearchCharacters.copyWith(
       isLoading: true,
       error: null,
     );
 
     dynamic errorWhenFetchCharacters;
-    Character? character;
+    List<Character> searchCharactersList = [];
     try {
-      character = await _charactersUseCase.getCharacterByName(name);
+      final List<Character> data = await _charactersUseCase.getCharacterByName(name);
+      searchCharactersList = data;
     } catch (e) {
       errorWhenFetchCharacters = e;
-      character = null;
+      searchCharactersList = [];
     }
 
-    snapshotCharacters = snapshotCharacters.copyWith(
+    snapshotSearchCharacters = snapshotSearchCharacters.copyWith(
+      data: searchCharactersList,
       isLoading: false,
       error: errorWhenFetchCharacters,
     );
+    return snapshotSearchCharacters.data;
   }
 
   void fetchCharacters() async {

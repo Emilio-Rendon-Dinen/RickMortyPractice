@@ -11,6 +11,7 @@ class CharacterInfoScreen extends StatelessWidget {
   final Character character;
 
   const CharacterInfoScreen({
+    super.key,
     required this.character,
   });
 
@@ -76,7 +77,6 @@ class CharacterInfoScreen extends StatelessWidget {
               ),
             ),
           )
-          // Expanded(child: EpisodesList(size: size, character: character))
         ]),
       ),
     );

@@ -28,7 +28,7 @@ class CharactersScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                showSearch(context: context, delegate: SearchCharacter());
+                showSearch(context: context, delegate: SearchCharacter(notifier: context.read<CharactersNotifier>()));
               },
               icon: const Icon(Icons.search))
         ],

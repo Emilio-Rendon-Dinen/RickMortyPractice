@@ -30,7 +30,7 @@ class DioCharactersRepository extends CharactersRepository {
   }
 
   @override
-  Future<Character> getCharacterByName(String characterName) async {
+  Future<List<Character>> getCharacterByName(String characterName) async {
     final Uri uri = Uri.parse('https://rickandmortyapi.com/api/character').replace(queryParameters: {
       'name': characterName,
     });
@@ -43,11 +43,11 @@ class DioCharactersRepository extends CharactersRepository {
       throw 'unexpected_data';
     }
 
-    final Character? character = Character.parseToObject(data);
-    if (character == null) {
+    final List<Character>? characters = Character.parseToList(data['results']);
+    if (characters == null) {
       throw 'unparsed_data';
     }
 
-    return character;
+    return characters;
   }
 }

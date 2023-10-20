@@ -7,5 +7,5 @@ abstract class CharactersRepository {
     required int pageIndex,
   });
 
-  Future<Character> getCharacterByName(String characterName);
+  Future<List<Character>> getCharacterByName(String characterName);
 }

@@ -16,7 +16,7 @@ class CharactersUseCase {
     );
   }
 
-  Future<Character> getCharacterByName(String characterName) {
+  Future<List<Character>> getCharacterByName(String characterName) {
     return _charactersRepository.getCharacterByName(characterName);
   }
 }
